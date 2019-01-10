@@ -3,14 +3,15 @@ console.log('Simple server example');
 console.log('Starting server');
 
 var http = require('http');
-
-
-http.createServer(function(req,res){
-    console.log('Fulfilling request');
+function requestHandler(req,res){
+    console.log('inside request handler');
     res.writeHead(200,{
+        'Content-Type':'text/plain',
+    })
+res.end('hello there \n');
+}
 
-        'Content-Type':'text/plain'
-    });
-    res.end('Request obtained');
-})
-.listen(4000);
+var server = http.createServer(requestHandler);
+server.listen(5000);
+
+
